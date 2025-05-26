@@ -14,6 +14,10 @@ import view.produto.ReajustarPrecoProdutoView;
 import view.categoria.CadastrarCategoriaView;
 import view.categoria.ConsultarCategoriasView;
 
+// IMPORT DAS TELAS DE MOVIMENTAÇÕES
+import view.movimentacoes.EntradaEstoqueView;
+import view.movimentacoes.SaidaEstoqueView;
+
 /**
  * Classe principal da aplicação que exibe a tela inicial do sistema.
  * Contém o menu principal com acesso a todas as funcionalidades.
@@ -187,22 +191,16 @@ public class TelaPrincipal extends JFrame {
         miEntradaEstoque.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui seria aberta a tela de entrada de estoque
                 lblStatus.setText("Abrindo entrada de estoque...");
-                JOptionPane.showMessageDialog(TelaPrincipal.this, 
-                        "Funcionalidade de entrada de estoque a ser implementada.", 
-                        "Informação", JOptionPane.INFORMATION_MESSAGE);
+                new EntradaEstoqueView().setVisible(true);
             }
         });
-        
+
         miSaidaEstoque.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui seria aberta a tela de saída de estoque
                 lblStatus.setText("Abrindo saída de estoque...");
-                JOptionPane.showMessageDialog(TelaPrincipal.this, 
-                        "Funcionalidade de saída de estoque a ser implementada.", 
-                        "Informação", JOptionPane.INFORMATION_MESSAGE);
+                new SaidaEstoqueView().setVisible(true);
             }
         });
         
