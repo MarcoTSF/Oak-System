@@ -10,6 +10,10 @@ import view.produto.CadastroProdutoView;
 import view.produto.ConsultarProdutoView;
 import view.produto.ReajustarPrecoProdutoView;
 
+// IMPORT DAS TELAS DE CATEGORIAS
+import view.categoria.CadastrarCategoriaView;
+import view.categoria.ConsultarCategoriasView;
+
 /**
  * Classe principal da aplicação que exibe a tela inicial do sistema.
  * Contém o menu principal com acesso a todas as funcionalidades.
@@ -166,22 +170,16 @@ public class TelaPrincipal extends JFrame {
         miCadastrarCategoria.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui seria aberta a tela de cadastro de categorias
                 lblStatus.setText("Abrindo cadastro de categorias...");
-                JOptionPane.showMessageDialog(TelaPrincipal.this, 
-                        "Funcionalidade de cadastro de categorias a ser implementada.", 
-                        "Informação", JOptionPane.INFORMATION_MESSAGE);
+                new CadastrarCategoriaView().setVisible(true);
             }
         });
-        
+
         miConsultarCategorias.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui seria aberta a tela de consulta de categorias
                 lblStatus.setText("Abrindo consulta de categorias...");
-                JOptionPane.showMessageDialog(TelaPrincipal.this, 
-                        "Funcionalidade de consulta de categorias a ser implementada.", 
-                        "Informação", JOptionPane.INFORMATION_MESSAGE);
+                new ConsultarCategoriasView().setVisible(true);
             }
         });
         
