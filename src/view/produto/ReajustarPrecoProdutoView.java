@@ -1,7 +1,6 @@
 package view.produto;
 
 import dao.ProdutoDAO;
-import model.Produto;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,24 +12,36 @@ public class ReajustarPrecoProdutoView extends JFrame {
     private JButton btnAjustar;
 
     public ReajustarPrecoProdutoView() {
-        setTitle("Reajustar  Preços");
-        setSize(400, 300);
-        setLayout(new GridLayout(2, 2));
+        setTitle("Reajustar Preços");
+        setSize(300, 130);
+        setLocationRelativeTo(null); // Centraliza a janela
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        add(new JLabel("Novo Valor Unitário:"));
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JPanel inputPanel = new JPanel(new GridLayout(1, 2, 5, 5));
+        inputPanel.add(new JLabel("Novo Valor Unitário:"));
         tfPrecoUnitario = new JTextField();
-        add(tfPrecoUnitario);
+        inputPanel.add(tfPrecoUnitario);
 
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         btnAjustar = new JButton("Reajustar");
-        add(btnAjustar);
+        buttonPanel.add(btnAjustar);
+
+        panel.add(inputPanel, BorderLayout.NORTH);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+
+        add(panel);
 
         btnAjustar.addActionListener((ActionEvent e) -> {
             try {
                 double novoValor = Double.parseDouble(tfPrecoUnitario.getText());
                 new ProdutoDAO().reajustarPrecos(novoValor);
-                JOptionPane.showMessageDialog(ReajustarPrecoProdutoView.this, "Produto reajustado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Produto reajustado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(ReajustarPrecoProdutoView.this, "Erro ao reajustar produto: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro ao reajustar produto: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
 
