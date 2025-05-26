@@ -1,0 +1,13 @@
+# Testes
+tests/
+
+# Arquivos compilados Java
+*.class
+out/
+target/
+build/
+
+# Logs
+*.log
+log/
+logs/
