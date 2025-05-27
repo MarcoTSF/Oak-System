@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import model.Categoria;
 import model.Produto;
 
@@ -481,5 +484,118 @@ public class ProdutoDAO {
             }
             ConnectionFactory.closeConnection(conn);
         }
+    }
+
+    /**
+     * Lista todos os produtos com os seus preços unitários.
+     *
+     * @return Uma lista de produtos contendo nome, preço unitário, unidade, quantidade em estoque e categoria.
+     */
+    public List<Produto> listarComPrecos() {
+        List<Produto> produtos = new ArrayList<>();
+        String sql = "SELECT p.id, p.nome, p.preco_unitario, p.unidade, p.quantidade_estoque, " +
+                "c.id as categoria_id, c.nome as categoria_nome, c.tamanho, c.embalagem " +
+                "FROM produto p " +
+                "JOIN categoria c ON p.categoria_id = c.id " +
+                "ORDER BY p.nome";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Categoria categoria = new Categoria(
+                        rs.getInt("categoria_id"),
+                        rs.getString("categoria_nome"),
+                        rs.getString("tamanho"),
+                        rs.getString("embalagem")
+                );
+
+                Produto produto = new Produto(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDouble("preco_unitario"),
+                        rs.getString("unidade"),
+                        rs.getInt("quantidade_estoque"),
+                        0, 0, // quantidade mínima e máxima não necessárias nesse caso
+                        categoria
+                );
+
+                produtos.add(produto);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao gerar relatório de preços: " + e.getMessage());
+        }
+
+        return produtos;
+    }
+
+    /**
+     * Calcula o valor total do estoque, multiplicando o preço unitário pela quantidade em estoque de cada produto.
+     *
+     * @return O valor monetário total de todos os produtos em estoque.
+     */
+    public double calcularValorTotalEstoque() {
+        double total = 0;
+        String sql = "SELECT SUM(preco_unitario * quantidade_estoque) AS total FROM produto";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                total = rs.getDouble("total");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao calcular valor total do estoque: " + e.getMessage());
+        }
+
+        return total;
+    }
+
+    /**
+     * Agrupa os produtos cadastrados por categoria.
+     *
+     * @return Um mapa onde a chave é a categoria e o valor é a lista de produtos pertencentes a ela.
+     */
+    public Map<Categoria, List<Produto>> listarProdutosPorCategoria() {
+        Map<Categoria, List<Produto>> mapa = new HashMap<>();
+        String sql = "SELECT p.id, p.nome, p.preco_unitario, p.unidade, p.quantidade_estoque, " +
+                "p.quantidade_minima, p.quantidade_maxima, c.id as categoria_id, c.nome as categoria_nome, " +
+                "c.tamanho, c.embalagem " +
+                "FROM produto p JOIN categoria c ON p.categoria_id = c.id ORDER BY c.nome, p.nome";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Categoria categoria = new Categoria(
+                        rs.getInt("categoria_id"),
+                        rs.getString("categoria_nome"),
+                        rs.getString("tamanho"),
+                        rs.getString("embalagem")
+                );
+
+                Produto produto = new Produto(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDouble("preco_unitario"),
+                        rs.getString("unidade"),
+                        rs.getInt("quantidade_estoque"),
+                        rs.getInt("quantidade_minima"),
+                        rs.getInt("quantidade_maxima"),
+                        categoria
+                );
+
+                mapa.computeIfAbsent(categoria, k -> new ArrayList<>()).add(produto);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao listar produtos por categoria: " + e.getMessage());
+        }
+
+        return mapa;
     }
 }
