@@ -18,6 +18,13 @@ import view.categoria.ConsultarCategoriasView;
 import view.movimentacoes.EntradaEstoqueView;
 import view.movimentacoes.SaidaEstoqueView;
 
+// IMPORT DAS TELAS DE RELATORIOS
+import view.relatorios.RelatorioAbaixoMinimoView;
+import view.relatorios.RelatorioAcimaMaximoView;
+import view.relatorios.RelatorioPorCategoriaView;
+import view.relatorios.RelatorioPrecosView;
+import view.relatorios.RelatorioBalancoView;
+
 /**
  * Classe principal da aplicação que exibe a tela inicial do sistema.
  * Contém o menu principal com acesso a todas as funcionalidades.
@@ -203,60 +210,45 @@ public class TelaPrincipal extends JFrame {
                 new SaidaEstoqueView().setVisible(true);
             }
         });
-        
+
         // Eventos do menu Relatórios
         miRelatorioPrecos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui seria gerado o relatório de preços
                 lblStatus.setText("Gerando relatório de preços...");
-                JOptionPane.showMessageDialog(TelaPrincipal.this, 
-                        "Funcionalidade de relatório de preços a ser implementada.", 
-                        "Informação", JOptionPane.INFORMATION_MESSAGE);
+                new RelatorioPrecosView().setVisible(true);
             }
         });
-        
+
         miRelatorioBalanco.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui seria gerado o relatório de balanço
                 lblStatus.setText("Gerando relatório de balanço...");
-                JOptionPane.showMessageDialog(TelaPrincipal.this, 
-                        "Funcionalidade de relatório de balanço a ser implementada.", 
-                        "Informação", JOptionPane.INFORMATION_MESSAGE);
+                new RelatorioBalancoView().setVisible(true);
             }
         });
-        
+
         miRelatorioAbaixoMinimo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui seria gerado o relatório de produtos abaixo do mínimo
                 lblStatus.setText("Gerando relatório de produtos abaixo do mínimo...");
-                JOptionPane.showMessageDialog(TelaPrincipal.this, 
-                        "Funcionalidade de relatório de produtos abaixo do mínimo a ser implementada.", 
-                        "Informação", JOptionPane.INFORMATION_MESSAGE);
+                new RelatorioAbaixoMinimoView().setVisible(true);
             }
         });
-        
+
         miRelatorioAcimaMaximo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui seria gerado o relatório de produtos acima do máximo
                 lblStatus.setText("Gerando relatório de produtos acima do máximo...");
-                JOptionPane.showMessageDialog(TelaPrincipal.this, 
-                        "Funcionalidade de relatório de produtos acima do máximo a ser implementada.", 
-                        "Informação", JOptionPane.INFORMATION_MESSAGE);
+                new RelatorioAcimaMaximoView().setVisible(true);
             }
         });
-        
+
         miRelatorioPorCategoria.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aqui seria gerado o relatório de produtos por categoria
                 lblStatus.setText("Gerando relatório de produtos por categoria...");
-                JOptionPane.showMessageDialog(TelaPrincipal.this, 
-                        "Funcionalidade de relatório de produtos por categoria a ser implementada.", 
-                        "Informação", JOptionPane.INFORMATION_MESSAGE);
+                new RelatorioPorCategoriaView().setVisible(true);
             }
         });
     }
