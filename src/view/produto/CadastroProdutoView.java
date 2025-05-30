@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 public class CadastroProdutoView extends JFrame {
 
     private JTextField tfNome, tfPreco, tfUnidade, tfEstoque, tfMinimo, tfMaximo, tfCategoria;
-    private JButton btnSalvar;
+    private JButton btnSalvar, btnCancelar;
 
     public CadastroProdutoView() {
         setTitle("Cadastrar Produto");
@@ -52,9 +52,12 @@ public class CadastroProdutoView extends JFrame {
         formPanel.add(new JLabel("ID Categoria:"));
         formPanel.add(tfCategoria);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         btnSalvar = new JButton("Salvar");
+        btnCancelar = new JButton("Cancelar");
+
         buttonPanel.add(btnSalvar);
+        buttonPanel.add(btnCancelar);
 
         panel.add(formPanel, BorderLayout.CENTER);
         panel.add(buttonPanel, BorderLayout.SOUTH);
@@ -69,7 +72,7 @@ public class CadastroProdutoView extends JFrame {
             p.setQuantidadeEstoque(Integer.parseInt(tfEstoque.getText()));
             p.setQuantidadeMinima(Integer.parseInt(tfMinimo.getText()));
             p.setQuantidadeMaxima(Integer.parseInt(tfMaximo.getText()));
-            // p.setCategoria(Integer.parseInt(tfCategoria.getText())); // Validar no set da model
+            //p.setCategoria(Integer.parseInt(tfCategoria.getText()));
 
             try {
                 new ProdutoDAO().inserir(p);
@@ -79,6 +82,8 @@ public class CadastroProdutoView extends JFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar produto: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
+
+        btnCancelar.addActionListener(e -> dispose());
 
         setVisible(true);
     }

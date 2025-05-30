@@ -9,12 +9,12 @@ import java.awt.event.ActionEvent;
 public class ReajustarPrecoProdutoView extends JFrame {
 
     private JTextField tfPrecoUnitario;
-    private JButton btnAjustar;
+    private JButton btnAjustar, btnCancelar;
 
     public ReajustarPrecoProdutoView() {
         setTitle("Reajustar Preços");
         setSize(300, 130);
-        setLocationRelativeTo(null); // Centraliza a janela
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel(new BorderLayout(10, 10));
@@ -25,9 +25,12 @@ public class ReajustarPrecoProdutoView extends JFrame {
         tfPrecoUnitario = new JTextField();
         inputPanel.add(tfPrecoUnitario);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         btnAjustar = new JButton("Reajustar");
+        btnCancelar = new JButton("Cancelar");
+
         buttonPanel.add(btnAjustar);
+        buttonPanel.add(btnCancelar);
 
         panel.add(inputPanel, BorderLayout.NORTH);
         panel.add(buttonPanel, BorderLayout.SOUTH);
@@ -44,6 +47,8 @@ public class ReajustarPrecoProdutoView extends JFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao reajustar produto: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
+
+        btnCancelar.addActionListener(e -> dispose());
 
         setVisible(true);
     }
