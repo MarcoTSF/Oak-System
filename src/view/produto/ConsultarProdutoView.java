@@ -22,7 +22,7 @@ public class ConsultarProdutoView extends JFrame {
         try {
             List<Produto> produtos = new ProdutoDAO().listarTodos();
             for (Produto p : produtos) {
-                textArea.append("ID: " + p.getId() + " - " + p.getNome() + " - R$ " + p.getPrecoUnitario());
+                textArea.append("ID: " + p.getId() + " - " + p.getNome() + " - R$ " + p.getPrecoUnitario() + "\n");
             }
         } catch (Exception ex){
             JOptionPane.showMessageDialog(ConsultarProdutoView.this, "Erro ao consultar produtos: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
