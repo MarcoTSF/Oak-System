@@ -14,6 +14,7 @@ public class ConsultarProdutoView extends JFrame {
     public ConsultarProdutoView(){
         setTitle("Consultar Produtos");
         setSize(500, 400);
+        setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         textArea = new JTextArea();
