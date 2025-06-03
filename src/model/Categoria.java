@@ -13,12 +13,6 @@ public class Categoria {
     private String embalagem; // Lata, Vidro, Plástico
     
     /**
-     * Construtor padrão da classe Categoria.
-     */
-    public Categoria() {
-    }
-    
-    /**
      * Construtor da classe Categoria com todos os atributos.
      * 
      * @param id Identificador único da categoria
