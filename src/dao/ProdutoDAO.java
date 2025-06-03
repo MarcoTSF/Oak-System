@@ -305,43 +305,59 @@ public class ProdutoDAO {
             ConnectionFactory.closeConnection(conn);
         }
     }
-    
+
     /**
-     * Reajusta os preços de todos os produtos em um determinado percentual.
-     * 
-     * @param percentual O percentual de reajuste (ex: 10 para 10%)
-     * @return O número de produtos reajustados
+     * Reajusta o preço de um produto específico com base em um percentual informado.
+     *
+     * @param idProduto O ID do produto que terá o preço reajustado.
+     * @param percentual O percentual de aumento (ex: 10 para 10%).
+     * @return O número de produtos atualizados (0 se nenhum for encontrado).
      */
-    public int reajustarPrecos(double percentual) {
+    public int reajustarPrecoPorcentagem(int idProduto, double percentual) {
         Connection conn = null;
         PreparedStatement stmt = null;
-        
+
         try {
-            // Obtém conexão com o banco de dados
             conn = ConnectionFactory.getConnection();
-            
-            // SQL para reajuste de preços
-            String sql = "UPDATE produto SET preco_unitario = preco_unitario * (1 + ? / 100)";
-            
-            // Prepara statement para atualização
+            String sql = "UPDATE produto SET preco_unitario = preco_unitario * (1 + ? / 100) WHERE id = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setDouble(1, percentual);
-            
-            // Executa a atualização
-            int linhasAfetadas = stmt.executeUpdate();
-            
-            // Retorna o número de produtos reajustados
-            return linhasAfetadas;
+            stmt.setInt(2, idProduto);
+
+            return stmt.executeUpdate();
         } catch (SQLException ex) {
-            System.err.println("Erro ao reajustar preços: " + ex.getMessage());
+            System.err.println("Erro ao reajustar por percentual: " + ex.getMessage());
             return 0;
         } finally {
-            // Fecha recursos
-            try {
-                if (stmt != null) stmt.close();
-            } catch (SQLException ex) {
-                System.err.println("Erro ao fechar recursos: " + ex.getMessage());
-            }
+            try { if (stmt != null) stmt.close(); } catch (SQLException ex) {}
+            ConnectionFactory.closeConnection(conn);
+        }
+    }
+
+    /**
+     * Define um novo valor unitário para um produto específico.
+     *
+     * @param idProduto O ID do produto que terá o preço alterado.
+     * @param novoValor O novo valor unitário a ser definido para o produto.
+     * @return O número de produtos atualizados (0 se nenhum for encontrado).
+     */
+    public int reajustarPrecoDireto(int idProduto, double novoValor) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = ConnectionFactory.getConnection();
+            String sql = "UPDATE produto SET preco_unitario = ? WHERE id = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setDouble(1, novoValor);
+            stmt.setInt(2, idProduto);
+
+            return stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println("Erro ao reajustar por valor direto: " + ex.getMessage());
+            return 0;
+        } finally {
+            try { if (stmt != null) stmt.close(); } catch (SQLException ex) {}
             ConnectionFactory.closeConnection(conn);
         }
     }
