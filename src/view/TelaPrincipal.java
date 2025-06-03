@@ -119,9 +119,6 @@ public class TelaPrincipal extends JFrame {
         
         // Painel principal
         painelPrincipal = new JPanel();
-        
-        // Barra de status
-        lblStatus = new JLabel("Sistema de Controle de Estoque - Pronto");
     }
     
     /**
@@ -142,7 +139,6 @@ public class TelaPrincipal extends JFrame {
         
         // Adiciona componentes ao painel principal
         painelPrincipal.add(lblLogo, BorderLayout.CENTER);
-        painelPrincipal.add(lblStatus, BorderLayout.SOUTH);
         
         // Adiciona o painel principal à janela
         add(painelPrincipal);
@@ -156,7 +152,6 @@ public class TelaPrincipal extends JFrame {
         miCadastrarProduto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Abrindo cadastro de produtos...");
                 new CadastroProdutoView().setVisible(true);
             }
         });
@@ -164,7 +159,6 @@ public class TelaPrincipal extends JFrame {
         miConsultarProdutos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Abrindo consulta de produtos...");
                 new ConsultarProdutoView().setVisible(true);
             }
         });
@@ -172,7 +166,6 @@ public class TelaPrincipal extends JFrame {
         miReajustarPrecos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Abrindo reajuste de preços...");
                 new ReajustarPrecoProdutoView().setVisible(true);
             }
         });
@@ -181,7 +174,6 @@ public class TelaPrincipal extends JFrame {
         miCadastrarCategoria.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Abrindo cadastro de categorias...");
                 new CadastrarCategoriaView().setVisible(true);
             }
         });
@@ -189,7 +181,6 @@ public class TelaPrincipal extends JFrame {
         miConsultarCategorias.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Abrindo consulta de categorias...");
                 new ConsultarCategoriasView().setVisible(true);
             }
         });
@@ -198,7 +189,6 @@ public class TelaPrincipal extends JFrame {
         miEntradaEstoque.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Abrindo entrada de estoque...");
                 new EntradaEstoqueView().setVisible(true);
             }
         });
@@ -206,7 +196,6 @@ public class TelaPrincipal extends JFrame {
         miSaidaEstoque.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Abrindo saída de estoque...");
                 new SaidaEstoqueView().setVisible(true);
             }
         });
@@ -215,7 +204,6 @@ public class TelaPrincipal extends JFrame {
         miRelatorioPrecos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Gerando relatório de preços...");
                 new RelatorioPrecosView().setVisible(true);
             }
         });
@@ -223,7 +211,6 @@ public class TelaPrincipal extends JFrame {
         miRelatorioBalanco.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Gerando relatório de balanço...");
                 new RelatorioBalancoView().setVisible(true);
             }
         });
@@ -231,7 +218,6 @@ public class TelaPrincipal extends JFrame {
         miRelatorioAbaixoMinimo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Gerando relatório de produtos abaixo do mínimo...");
                 new RelatorioAbaixoMinimoView().setVisible(true);
             }
         });
@@ -239,7 +225,6 @@ public class TelaPrincipal extends JFrame {
         miRelatorioAcimaMaximo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Gerando relatório de produtos acima do máximo...");
                 new RelatorioAcimaMaximoView().setVisible(true);
             }
         });
@@ -247,7 +232,6 @@ public class TelaPrincipal extends JFrame {
         miRelatorioPorCategoria.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lblStatus.setText("Gerando relatório de produtos por categoria...");
                 new RelatorioPorCategoriaView().setVisible(true);
             }
         });
