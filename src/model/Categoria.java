@@ -11,7 +11,15 @@ public class Categoria {
     private String nome;
     private String tamanho; // Pequeno, Médio, Grande
     private String embalagem; // Lata, Vidro, Plástico
-    
+
+    /**
+     * Construtor padrão da classe Categoria.
+     * Inicializa os atributos com valores padrão (nome vazio, tamanho vazio, embalagem vazia).
+     */
+    public Categoria() {
+        this("", "", "");
+    }
+
     /**
      * Construtor da classe Categoria com todos os atributos.
      * 
@@ -39,7 +47,7 @@ public class Categoria {
         this.tamanho = tamanho;
         this.embalagem = embalagem;
     }
-    
+
     // Métodos getters e setters
     
     /**

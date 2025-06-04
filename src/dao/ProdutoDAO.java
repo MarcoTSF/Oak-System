@@ -307,6 +307,32 @@ public class ProdutoDAO {
     }
 
     /**
+     * Reajusta os preços de todos os produtos em um determinado percentual.
+     *
+     * @param percentual O percentual de reajuste (ex: 10 para 10%)
+     * @return O número de produtos reajustados
+     */
+    public int reajustarPrecos(double percentual) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = ConnectionFactory.getConnection();
+            String sql = "UPDATE produto SET preco_unitario = preco_unitario * (1 + ? / 100)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setDouble(1, percentual);
+
+            return stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println("Erro ao reajustar preços: " + ex.getMessage());
+            return 0;
+        } finally {
+            try { if (stmt != null) stmt.close(); } catch (SQLException ex) {}
+            ConnectionFactory.closeConnection(conn);
+        }
+    }
+
+    /**
      * Reajusta o preço de um produto específico com base em um percentual informado.
      *
      * @param idProduto O ID do produto que terá o preço reajustado.

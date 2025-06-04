@@ -6,13 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class ReajustarPrecoProdutoView extends JFrame {
-
+public class ReajustarPrecoProdutoUnitarioView extends JFrame {
     private JTextField tfIdProduto, tfValor;
     private JButton btnAjustar, btnCancelar;
     private JRadioButton rbPorcentagem, rbValorDireto;
 
-    public ReajustarPrecoProdutoView() {
+    public ReajustarPrecoProdutoUnitarioView() {
         setTitle("Reajustar Preço de Produto");
         setSize(400, 220);
         setLocationRelativeTo(null);

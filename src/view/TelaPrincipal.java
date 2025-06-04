@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 // IMPORT DAS TELAS DE PRODUTOS
 import view.produto.CadastroProdutoView;
 import view.produto.ConsultarProdutoView;
-import view.produto.ReajustarPrecoProdutoView;
+import view.produto.ReajustarPrecoProdutoMassaView;
+import view.produto.ReajustarPrecoProdutoUnitarioView;
 
 // IMPORT DAS TELAS DE CATEGORIAS
 import view.categoria.CadastrarCategoriaView;
@@ -34,7 +35,7 @@ public class TelaPrincipal extends JFrame {
     // Componentes da interface
     private JMenuBar menuBar;
     private JMenu menuProdutos, menuCategorias, menuMovimentacoes, menuRelatorios;
-    private JMenuItem miCadastrarProduto, miConsultarProdutos, miReajustarPrecos;
+    private JMenuItem miCadastrarProduto, miConsultarProdutos, miReajustarPrecosMassa, miReajustarPrecosUnitario;
     private JMenuItem miCadastrarCategoria, miConsultarCategorias;
     private JMenuItem miEntradaEstoque, miSaidaEstoque;
     private JMenuItem miRelatorioPrecos, miRelatorioBalanco, miRelatorioAbaixoMinimo;
@@ -77,11 +78,12 @@ public class TelaPrincipal extends JFrame {
         menuProdutos = new JMenu("Produtos");
         miCadastrarProduto = new JMenuItem("Cadastrar");
         miConsultarProdutos = new JMenuItem("Consultar");
-        miReajustarPrecos = new JMenuItem("Reajustar Preços");
+        miReajustarPrecosMassa = new JMenuItem("Reajustar Preços em Massa");
+        miReajustarPrecosUnitario = new JMenuItem("Reajustar Preço Unitário");
         menuProdutos.add(miCadastrarProduto);
         menuProdutos.add(miConsultarProdutos);
-        menuProdutos.addSeparator();
-        menuProdutos.add(miReajustarPrecos);
+        menuProdutos.add(miReajustarPrecosMassa);
+        menuProdutos.add(miReajustarPrecosUnitario);
         
         // Menu Categorias
         menuCategorias = new JMenu("Categorias");
@@ -163,10 +165,17 @@ public class TelaPrincipal extends JFrame {
             }
         });
 
-        miReajustarPrecos.addActionListener(new ActionListener() {
+        miReajustarPrecosMassa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ReajustarPrecoProdutoView().setVisible(true);
+                new ReajustarPrecoProdutoMassaView().setVisible(true);
+            }
+        });
+
+        miReajustarPrecosUnitario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ReajustarPrecoProdutoUnitarioView().setVisible(true);
             }
         });
         
