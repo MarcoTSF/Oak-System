@@ -9,7 +9,8 @@ import java.awt.event.ActionEvent;
 
 public class CadastroProdutoView extends JFrame {
 
-    private JTextField tfNome, tfPreco, tfUnidade, tfEstoque, tfMinimo, tfMaximo, tfCategoria;
+    private JTextField tfNome, tfPreco, tfEstoque, tfMinimo, tfMaximo, tfCategoria;
+    private JComboBox<String> cbUnidade;
     private JButton btnSalvar, btnCancelar;
 
     public CadastroProdutoView() {
@@ -25,7 +26,9 @@ public class CadastroProdutoView extends JFrame {
 
         tfNome = new JTextField();
         tfPreco = new JTextField();
-        tfUnidade = new JTextField();
+        cbUnidade = new JComboBox<>(new String[]{
+                "Lata", "Pacote", "Garrafa", "Caixa", "Saco", "Envelope", "Pote"
+        });
         tfEstoque = new JTextField();
         tfMinimo = new JTextField();
         tfMaximo = new JTextField();
@@ -38,7 +41,7 @@ public class CadastroProdutoView extends JFrame {
         formPanel.add(tfPreco);
 
         formPanel.add(new JLabel("Unidade:"));
-        formPanel.add(tfUnidade);
+        formPanel.add(cbUnidade);
 
         formPanel.add(new JLabel("Qtd Estoque:"));
         formPanel.add(tfEstoque);
@@ -65,16 +68,16 @@ public class CadastroProdutoView extends JFrame {
         add(panel);
 
         btnSalvar.addActionListener((ActionEvent e) -> {
-            Produto p = new Produto();
-            p.setNome(tfNome.getText());
-            p.setPrecoUnitario(Double.parseDouble(tfPreco.getText()));
-            p.setUnidade(tfUnidade.getText());
-            p.setQuantidadeEstoque(Integer.parseInt(tfEstoque.getText()));
-            p.setQuantidadeMinima(Integer.parseInt(tfMinimo.getText()));
-            p.setQuantidadeMaxima(Integer.parseInt(tfMaximo.getText()));
-            //p.setCategoria(Integer.parseInt(tfCategoria.getText()));
-
             try {
+                Produto p = new Produto();
+                p.setNome(tfNome.getText());
+                p.setPrecoUnitario(Double.parseDouble(tfPreco.getText()));
+                p.setUnidade((String) cbUnidade.getSelectedItem());
+                p.setQuantidadeEstoque(Integer.parseInt(tfEstoque.getText()));
+                p.setQuantidadeMinima(Integer.parseInt(tfMinimo.getText()));
+                p.setQuantidadeMaxima(Integer.parseInt(tfMaximo.getText()));
+                //p.setCategoria(Integer.parseInt(tfCategoria.getText()));
+
                 new ProdutoDAO().inserir(p);
                 JOptionPane.showMessageDialog(this, "Produto salvo!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
