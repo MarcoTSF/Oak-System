@@ -20,6 +20,7 @@ import view.categoria.ExcluirCategoriaView;
 // IMPORT DAS TELAS DE MOVIMENTAÇÕES
 import view.movimentacoes.EntradaEstoqueView;
 import view.movimentacoes.SaidaEstoqueView;
+import view.movimentacoes.HistoricoEstoqueView;
 
 // IMPORT DAS TELAS DE RELATORIOS
 import view.relatorios.RelatorioAbaixoMinimoView;
@@ -39,7 +40,7 @@ public class TelaPrincipal extends JFrame {
     private JMenu menuProdutos, menuCategorias, menuMovimentacoes, menuRelatorios;
     private JMenuItem miCadastrarProduto, miConsultarProdutos, miExcluirProduto, miReajustarPrecosMassa, miReajustarPrecosUnitario;
     private JMenuItem miCadastrarCategoria, miConsultarCategorias, miExcluirCategoria;
-    private JMenuItem miEntradaEstoque, miSaidaEstoque;
+    private JMenuItem miEntradaEstoque, miSaidaEstoque, miHistoricoEstoque;
     private JMenuItem miRelatorioPrecos, miRelatorioBalanco, miRelatorioAbaixoMinimo;
     private JMenuItem miRelatorioAcimaMaximo, miRelatorioPorCategoria;
     private JPanel painelPrincipal;
@@ -102,8 +103,10 @@ public class TelaPrincipal extends JFrame {
         menuMovimentacoes = new JMenu("Movimentações");
         miEntradaEstoque = new JMenuItem("Entrada");
         miSaidaEstoque = new JMenuItem("Saída");
+        miHistoricoEstoque = new JMenuItem("Histórico de Movimentações");
         menuMovimentacoes.add(miEntradaEstoque);
         menuMovimentacoes.add(miSaidaEstoque);
+        menuMovimentacoes.add(miHistoricoEstoque);
         
         // Menu Relatórios
         menuRelatorios = new JMenu("Relatórios");
@@ -224,6 +227,13 @@ public class TelaPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new SaidaEstoqueView().setVisible(true);
+            }
+        });
+
+        miHistoricoEstoque.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new HistoricoEstoqueView().setVisible(true);
             }
         });
 

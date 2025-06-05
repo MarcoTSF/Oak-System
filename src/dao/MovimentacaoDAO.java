@@ -247,7 +247,7 @@ public class MovimentacaoDAO {
                          "FROM movimentacao m " +
                          "JOIN produto p ON m.produto_id = p.id " +
                          "JOIN categoria c ON p.categoria_id = c.id " +
-                         "ORDER BY m.data_hora DESC";
+                         "ORDER BY m.id ASC";
             
             // Prepara statement para consulta
             stmt = conn.prepareStatement(sql);
