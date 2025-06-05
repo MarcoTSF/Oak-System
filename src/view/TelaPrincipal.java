@@ -8,12 +8,14 @@ import java.awt.event.ActionListener;
 // IMPORT DAS TELAS DE PRODUTOS
 import view.produto.CadastroProdutoView;
 import view.produto.ConsultarProdutoView;
+import view.produto.ExcluirProdutoView;
 import view.produto.ReajustarPrecoProdutoMassaView;
 import view.produto.ReajustarPrecoProdutoUnitarioView;
 
 // IMPORT DAS TELAS DE CATEGORIAS
 import view.categoria.CadastrarCategoriaView;
 import view.categoria.ConsultarCategoriasView;
+import view.categoria.ExcluirCategoriaView;
 
 // IMPORT DAS TELAS DE MOVIMENTAÇÕES
 import view.movimentacoes.EntradaEstoqueView;
@@ -35,8 +37,8 @@ public class TelaPrincipal extends JFrame {
     // Componentes da interface
     private JMenuBar menuBar;
     private JMenu menuProdutos, menuCategorias, menuMovimentacoes, menuRelatorios;
-    private JMenuItem miCadastrarProduto, miConsultarProdutos, miReajustarPrecosMassa, miReajustarPrecosUnitario;
-    private JMenuItem miCadastrarCategoria, miConsultarCategorias;
+    private JMenuItem miCadastrarProduto, miConsultarProdutos, miExcluirProduto, miReajustarPrecosMassa, miReajustarPrecosUnitario;
+    private JMenuItem miCadastrarCategoria, miConsultarCategorias, miExcluirCategoria;
     private JMenuItem miEntradaEstoque, miSaidaEstoque;
     private JMenuItem miRelatorioPrecos, miRelatorioBalanco, miRelatorioAbaixoMinimo;
     private JMenuItem miRelatorioAcimaMaximo, miRelatorioPorCategoria;
@@ -78,10 +80,12 @@ public class TelaPrincipal extends JFrame {
         menuProdutos = new JMenu("Produtos");
         miCadastrarProduto = new JMenuItem("Cadastrar");
         miConsultarProdutos = new JMenuItem("Consultar");
+        miExcluirProduto = new JMenuItem("Excluir");
         miReajustarPrecosMassa = new JMenuItem("Reajustar Preços em Massa");
         miReajustarPrecosUnitario = new JMenuItem("Reajustar Preço Unitário");
         menuProdutos.add(miCadastrarProduto);
         menuProdutos.add(miConsultarProdutos);
+        menuProdutos.add(miExcluirProduto);
         menuProdutos.add(miReajustarPrecosMassa);
         menuProdutos.add(miReajustarPrecosUnitario);
         
@@ -89,8 +93,10 @@ public class TelaPrincipal extends JFrame {
         menuCategorias = new JMenu("Categorias");
         miCadastrarCategoria = new JMenuItem("Cadastrar");
         miConsultarCategorias = new JMenuItem("Consultar");
+        miExcluirCategoria = new JMenuItem("Excluir");
         menuCategorias.add(miCadastrarCategoria);
         menuCategorias.add(miConsultarCategorias);
+        menuCategorias.add(miExcluirCategoria);
         
         // Menu Movimentações
         menuMovimentacoes = new JMenu("Movimentações");
@@ -165,6 +171,11 @@ public class TelaPrincipal extends JFrame {
             }
         });
 
+        miExcluirProduto.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) { new ExcluirProdutoView().setVisible(true); }
+        });
+
         miReajustarPrecosMassa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -191,6 +202,13 @@ public class TelaPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ConsultarCategoriasView().setVisible(true);
+            }
+        });
+
+        miExcluirCategoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ExcluirCategoriaView().setVisible(true);
             }
         });
         
