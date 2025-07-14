@@ -29,6 +29,9 @@ import view.relatorios.RelatorioPorCategoriaView;
 import view.relatorios.RelatorioPrecosView;
 import view.relatorios.RelatorioBalancoView;
 
+// IMPORT DA TELA SOBRE
+import view.sobre.SobreView;
+
 /**
  * Classe principal da aplicação que exibe a tela inicial do sistema.
  * Contém o menu principal com acesso a todas as funcionalidades.
@@ -37,12 +40,13 @@ public class TelaPrincipal extends JFrame {
     
     // Componentes da interface
     private JMenuBar menuBar;
-    private JMenu menuProdutos, menuCategorias, menuMovimentacoes, menuRelatorios;
+    private JMenu menuProdutos, menuCategorias, menuMovimentacoes, menuRelatorios, menuAjuda;
     private JMenuItem miCadastrarProduto, miConsultarProdutos, miExcluirProduto, miReajustarPrecosMassa, miReajustarPrecosUnitario;
     private JMenuItem miCadastrarCategoria, miConsultarCategorias, miExcluirCategoria;
     private JMenuItem miEntradaEstoque, miSaidaEstoque, miHistoricoEstoque;
     private JMenuItem miRelatorioPrecos, miRelatorioBalanco, miRelatorioAbaixoMinimo;
     private JMenuItem miRelatorioAcimaMaximo, miRelatorioPorCategoria;
+    private JMenuItem miSobre;
     private JPanel painelPrincipal;
     private JLabel lblStatus;
     
@@ -52,7 +56,7 @@ public class TelaPrincipal extends JFrame {
      */
     public TelaPrincipal() {
         // Configurações básicas da janela
-        setTitle("Sistema de Controle de Estoque");
+        setTitle("Oak System - Sistema de Controle de Estoque");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -121,13 +125,19 @@ public class TelaPrincipal extends JFrame {
         menuRelatorios.add(miRelatorioAbaixoMinimo);
         menuRelatorios.add(miRelatorioAcimaMaximo);
         menuRelatorios.add(miRelatorioPorCategoria);
+
+        // Menu Ajuda
+        menuAjuda = new JMenu("Ajuda");
+        miSobre = new JMenuItem("Sobre");
+        menuAjuda.add(miSobre);
         
         // Adiciona menus à barra
         menuBar.add(menuProdutos);
         menuBar.add(menuCategorias);
         menuBar.add(menuMovimentacoes);
         menuBar.add(menuRelatorios);
-        
+        menuBar.add(menuAjuda);
+
         // Painel principal
         painelPrincipal = new JPanel();
     }
@@ -271,6 +281,12 @@ public class TelaPrincipal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 new RelatorioPorCategoriaView().setVisible(true);
             }
+        });
+
+        // Eventos do menu Sobre
+        miSobre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { new SobreView(TelaPrincipal.this).setVisible(true); }
         });
     }
 }
